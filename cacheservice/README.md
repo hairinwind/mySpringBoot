@@ -22,3 +22,14 @@ public int fetchNonCacheData(String name) {
 ```angular2
 @CacheEvict(value="data", allEntries=true)
 ```
+
+## unit test is provided
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+would start a new spring context before each test method
+
+mockito mock service returns different value 
+use "thenAnswer"  https://stackoverflow.com/questions/8088179/using-mockito-with-multiple-calls-to-the-same-method-with-the-same-arguments  
+https://www.toptal.com/java/a-guide-to-everyday-mockito
+
+spring mvc unit test reference: http://zetcode.com/spring/mockmvc/
+

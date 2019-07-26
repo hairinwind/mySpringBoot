@@ -24,6 +24,11 @@ public class FetchDataController {
         return "cache 'data' is cleared...";
     }
 
+    @GetMapping("/clearCache")
+    public String clearCacheProgramatically(){
+        Cachemanager
+    }
+
     @GetMapping("/fetchNonCacheData")
     public int fetchNonCacheData(@RequestParam(value="name", defaultValue="test") String name) {
         return fetchDataService.fetchNonCacheData(name);
