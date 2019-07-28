@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage( "my.springboot.swagger" )) //this gets rid of "basic-error-controller" from springfox swagger-ui
                 .paths(PathSelectors.any())
                 .build();
     }
