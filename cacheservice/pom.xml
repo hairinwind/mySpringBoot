@@ -27,6 +27,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <!--
+            This helps auto restart in IDE, but it is not that helpful in intellij
+            Intellij need do a couple of settings to make the auto compiling happen
+            https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save
+            even the setting is correct, it is slow to detect the class change and restart
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>pl.project13.maven</groupId>
             <artifactId>git-commit-id-plugin</artifactId>
