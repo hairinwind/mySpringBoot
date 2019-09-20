@@ -21,3 +21,6 @@ Visiting http://localhost:8080/person produces the following output
 21:32:38.202 [http-nio-8080-exec-1] TRACE m.s.p.service.ServiceDelegate - StopWatch 'my.springboot.performancemonitor.service.ServiceDelegate.getPerson': running time (millis) = 8
 21:32:38.202 [http-nio-8080-exec-1] TRACE m.s.p.controller.PersonController - StopWatch 'my.springboot.performancemonitor.controller.PersonController.getPerson': running time (millis) = 13
 ```
+
+## Spring AOP pointcut expression
+https://stackoverflow.com/questions/49884801/wildcard-support-on-package-name-in-spring-aop-pointcut-expression
