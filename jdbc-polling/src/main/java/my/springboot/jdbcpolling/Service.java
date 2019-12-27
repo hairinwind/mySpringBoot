@@ -10,8 +10,8 @@ import java.util.List;
 public class Service {
 
     @ServiceActivator(inputChannel = "jdbcPolling-inbound-channel")
-    public void handleTestData(Object obj) {
-        List<Test> testList = (List<Test>) obj;
+    public void handleTestData(List<Test> testList) {
+//        List<Test> testList = (List<Test>) obj;
         testList.forEach(test -> {
             System.out.println(test);
             // process the data here ...
