@@ -37,12 +37,7 @@ public class PollingConfiguration {
     public MessageChannel jdbcPollingChannel() {
         return MessageChannels.direct().get();
     }
-
-    @Bean
-    public MessageChannel jdbcPollingInboundFlow() {
-        return new DirectChannel();
-    }
-
+    
     @Bean
     public IntegrationFlow jdbcPollingDbPollingFlow() {
         return IntegrationFlows.from("jdbcPollingInboundFlow")
