@@ -1,4 +1,5 @@
 ## visit h2 database from web console
+https://stackoverflow.com/questions/55830010/how-to-enable-h2-database-server-mode-in-spring-boot
 ```$xslt
 spring.datasource.initialization-mode=always
 spring.datasource.schema=classpath:h2_init.sql
