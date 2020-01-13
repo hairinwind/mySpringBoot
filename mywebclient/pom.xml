@@ -26,6 +26,7 @@
         <dependency>
             <groupId>org.projectreactor</groupId>
             <artifactId>reactor-spring</artifactId>
+            <version>1.0.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
