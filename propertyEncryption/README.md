@@ -21,6 +21,7 @@ public class PropertyEncryptionApplication implements CommandLineRunner {
 ```
 
 ## encrypt sensitive properties
+https://medium.com/@sun30nil/how-to-secure-secrets-and-passwords-in-springboot-90c952961d9
 ```
 java -cp ~/.m2/repository/org/jasypt/jasypt/1.9.2/jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input=Topsecret@123 password=dev-env-secret algorithm=PBEWITHMD5ANDDES
 ```
@@ -38,3 +39,5 @@ spring.datasource.password=ENC(U5ky3iDGTZkR+L1bUGjMiKKaE8J2U3TX)
 ```
 
 Now the spring can decrypt the encrypted properties
+
+https://www.baeldung.com/spring-boot-jasypt
