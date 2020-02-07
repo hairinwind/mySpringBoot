@@ -1,7 +1,10 @@
 package my.springboot.property;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +22,17 @@ public class PropertyConfig {
 	
 	private String name;
 	
+	private Date dateOfBirth;
+	
 	private Country country;
 	
 	private List<String> titles = new ArrayList<>();
 	
 	private List<Address> addresses = new ArrayList<>();
 
+	@PostConstruct
+	private void postConstruct() {
+		System.out.println("users: " + this);
+		this.addresses.forEach(System.out::println);
+	}
 }
