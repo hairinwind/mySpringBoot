@@ -1,6 +1,9 @@
 package my.springboot.property;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,11 +13,14 @@ import my.springboot.property.domain.Country;
 @RestController
 public class PropertyController {
 	
+	@Value("#{new java.text.SimpleDateFormat('yyyy-MM-dd').parse('${users.dateOfBirth}')}")
+	private Date dateOfBirth;
+	
 	@Autowired 
 	PropertyConfig propertyConfig;
 	
 	@GetMapping("/properties")
-    public PropertyConfig updateCustomer() {
+    public Date updateCustomer() {
 		System.out.println("");
 		System.out.println("..propertyConfig..." + propertyConfig.toString());
 		System.out.println("");
@@ -24,6 +30,7 @@ public class PropertyController {
 		Address address1 = propertyConfig.getAddresses().get(0);
 		System.out.println("address 1: " + address1.getStreetAddress() 
 				+ " " + address1.getCity());
-        return propertyConfig;
+		System.out.println("dateOfBirth:" + dateOfBirth);
+        return dateOfBirth;
     }
 }
