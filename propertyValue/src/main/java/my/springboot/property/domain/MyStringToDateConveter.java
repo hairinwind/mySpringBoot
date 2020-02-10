@@ -8,12 +8,16 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesBindin
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 @ConfigurationPropertiesBinding
 public class MyStringToDateConveter implements Converter<String, Date> {
 
 	@Override
 	public Date convert(String source) {
+		log.info("...converting...{}", source);
 		try {
 			return new SimpleDateFormat("yyyy-MM-dd").parse(source);
 		} catch (ParseException e) {
