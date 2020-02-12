@@ -62,3 +62,7 @@ convert it to sub object directly
 private List<Address> addresses = new ArrayList<>();
 ```
 i found it had to use yml, then it can convert json in addresses directly to POJO. 
+
+## TODO 
+https://spring.io/blog/2018/03/28/property-binding-in-spring-boot-2-0
+

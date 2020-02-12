@@ -24,10 +24,4 @@ public class AppController {
         return customer;
     }
 	
-	@PostMapping("/updateCustomer1")
-	public my.springboot.requestbody.domain1.Customer updateCustomer1(
-			@RequestBody my.springboot.requestbody.domain1.Customer customer) {
-		System.out.println("...customer..." + customer.toString());
-		return customer;
-	}
 }
