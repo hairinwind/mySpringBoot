@@ -1,4 +1,4 @@
-package my.springboot.profile;
+package my.springboot.encryption;
 
 public class SampleBean {
 

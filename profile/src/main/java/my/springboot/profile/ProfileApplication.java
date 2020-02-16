@@ -25,6 +25,8 @@ public class ProfileApplication implements CommandLineRunner {
         for (String bean : beans) {
             if (bean.equals("sampleBean")) {
             	System.out.println("sampleBean is found...");
+            	SampleBean sampleBean = appContext.getBean(SampleBean.class);
+            	System.out.println("sampleBean: " + sampleBean.getValue());
             }
         }
 	}

@@ -41,3 +41,14 @@ spring.datasource.password=ENC(U5ky3iDGTZkR+L1bUGjMiKKaE8J2U3TX)
 Now the spring can decrypt the encrypted properties
 
 https://www.baeldung.com/spring-boot-jasypt
+
+## disable bean overriding
+In AnotherConfiguration, create the same bean "sampleBean". If you don't want to allow bean overriding, put the property below
+```
+spring.main.allow-bean-definition-overriding=false
+```
+Then, you will get the exception. 
+I used to have two jasypt bean in my project. They are duplicated. Later, I upgraded the jasypt to another algorithm. But it did not work. It is because there is old bean override the jasypt bean I upgraded. 
+Setting the property above can avoid bean overriding. 
+
+The two different beans have to be configured in different configuration classes. If they are on the same class, it won't throw error. 

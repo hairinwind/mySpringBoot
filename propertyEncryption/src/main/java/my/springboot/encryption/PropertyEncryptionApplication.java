@@ -1,5 +1,6 @@
 package my.springboot.encryption;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,9 @@ public class PropertyEncryptionApplication implements CommandLineRunner {
 	
 	@Value("${spring.datasource.password}")
     private String password;
+	
+	@Autowired
+	private SampleBean sampleBean;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PropertyEncryptionApplication.class, args);
@@ -22,6 +26,7 @@ public class PropertyEncryptionApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		System.out.println("password:" + password);
+		System.out.println("sampleBean: " + sampleBean.getValue());
 		
 	}
 
