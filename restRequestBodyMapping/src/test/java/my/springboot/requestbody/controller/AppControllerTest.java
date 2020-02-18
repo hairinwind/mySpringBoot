@@ -94,9 +94,77 @@ class AppControllerTest {
 					.content(asJsonString(customer))
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)
-				).andExpect(status().isOk());
-		
-		//TODO shall get validation error
+				).andExpect(status().isBadRequest()); // customer does not have id, it cannot pass validation
 	}
-
+	
+	@Test
+	void testRequiredProductIdNotProvided() throws Exception {
+		//test id in sub object product is not provided
+		Product product = Product.builder().build();
+		List<Product> products = Arrays.asList(product);
+		Customer customer = Customer.builder().id("123").name("customer1").products(products).build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isBadRequest()); //sub object product does not have id
+	}
+	
+	@Test
+	void testRequiredPropertiesProvided() throws Exception {
+		Product product = Product.builder().id(1).build();
+		List<Product> products = Arrays.asList(product);
+		Customer customer = Customer.builder().id("123").name("customer1").products(products).build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isOk());
+	}
+	
+	@Test
+	void testCustomerNameRegex() throws Exception {
+		//valid customer name
+		Customer customer = Customer.builder().id("c1").name("customer1")
+				.build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isOk());
+		
+		//invalid character in customer name
+		customer = Customer.builder().id("c1").name("customer_1").build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void testCustomerEndDateAfterStartDate() throws Exception {
+		//valid customer name
+		Customer customer = Customer.builder().id("c1").name("customer1")
+				.startDate(LocalDate.of(2000, 1, 20))
+				.endDate(LocalDate.of(2001, 1, 20))
+				.build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isOk());
+		
+		//invalid character in customer name
+		customer = Customer.builder().id("c1").name("customer_1")
+				.startDate(LocalDate.of(2000, 1, 20))
+				.endDate(LocalDate.of(1999, 1, 20))
+				.build();
+		mvc.perform(MockMvcRequestBuilders.post("/updateCustomer")
+				.content(asJsonString(customer))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+			).andExpect(status().isBadRequest());
+	}
+	
 }

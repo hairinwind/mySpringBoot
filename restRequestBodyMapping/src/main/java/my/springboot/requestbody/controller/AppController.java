@@ -1,5 +1,7 @@
 package my.springboot.requestbody.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +21,7 @@ public class AppController {
 	 * @return
 	 */
 	@PostMapping("/updateCustomer")
-    public Customer updateCustomer(@RequestBody Customer customer) {
+    public Customer updateCustomer(@Valid @RequestBody Customer customer) {
 		System.out.println("..customer..." + customer.toString());
         return customer;
     }

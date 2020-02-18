@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -19,6 +23,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import my.springboot.requestbody.validator.EndDateConstraint;
 
 @Data
 @Builder
@@ -26,12 +31,22 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @JsonInclude(Include.NON_NULL) // don't include null properties when creating json string
+@EndDateConstraint.List({ 
+    @EndDateConstraint(
+      startDate = "startDate", 
+      endDate = "endDate", 
+      message = "endDate shall be after startDate"
+    )
+})
 public class Customer {
 
-	@JsonProperty(required=true) //TODO not working yet
+	@NotNull(message = "id is not provided")
+	@JsonProperty(required=true) //TODO not working yet, using NotNull instead
 	private String id;
 	
+	@Pattern(regexp = "[a-z-A-Z0-9]*", message = "name has invalid characters")
 	private String name;
+	
 	private Gender gender;
 	private Set<Country> nationalitySet;
 	
@@ -40,6 +55,16 @@ public class Customer {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateOfBirth;
 	
-	private List<Product> products = new ArrayList<>();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate startDate;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate endDate;
+	
+	private List<@Valid Product> products = new ArrayList<>();
 	
 }
