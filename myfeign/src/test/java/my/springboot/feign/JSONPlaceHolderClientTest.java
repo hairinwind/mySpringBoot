@@ -3,6 +3,7 @@ package my.springboot.feign;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ class JSONPlaceHolderClientTest {
 
 	@Test
 	void testGetPosts() {
-		List<Post> posts = client.getPosts();
+		List<Post> posts = client.getPosts(new HashMap<>());
 		System.out.println(posts.size());
 		assertNotNull(posts);
 	}

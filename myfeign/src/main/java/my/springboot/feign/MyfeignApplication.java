@@ -11,5 +11,5 @@ public class MyfeignApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyfeignApplication.class, args);
 	}
-
+	
 }

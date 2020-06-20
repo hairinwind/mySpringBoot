@@ -2,6 +2,7 @@ package my.springboot.feign.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,14 @@ public class MyFeignController {
 
 	@GetMapping("/test")
     public ResponseEntity<Object> test() {
-		List<Post> posts = jsonPlaceHolderClient.getPosts();
+		List<Post> posts = jsonPlaceHolderClient.getPosts(new HashMap<>());
         return ResponseEntity.status(HttpStatus.OK).body(posts); 
     }
 	
 	@GetMapping("/testDynamicUri")
     public ResponseEntity<Object> testDynamicUri() throws URISyntaxException {
 		URI uri = new URI("https://jsonplaceholder.typicode.com/posts");
-		List<Post> posts = dynamicUrlFeignClient.getPosts(uri);
+		List<Post> posts = dynamicUrlFeignClient.getPosts(uri, new HashMap<>());
         return ResponseEntity.status(HttpStatus.OK).body(posts); 
     }
 	

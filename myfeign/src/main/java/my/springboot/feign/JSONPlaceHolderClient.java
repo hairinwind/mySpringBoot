@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface JSONPlaceHolderClient {
  
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
-    List<Post> getPosts();
+    List<Post> getPosts(@RequestHeader Map<String, String> header);
  
     @RequestMapping(method = RequestMethod.POST, value = "/posts", produces = "application/json")
     Map<String, Object> postPosts(List<Post> posts);
