@@ -21,3 +21,7 @@ feign:
 
 logging.level.my.springboot.feign.JSONPlaceHolderClient: DEBUG
 ```
+
+## dynamic URL feign client
+https://github.com/hairinwind/blog/blob/master/springBoot.md#feign-dynamic-url-in-spring-boot  
+
