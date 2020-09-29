@@ -32,3 +32,9 @@ use "thenAnswer"  https://stackoverflow.com/questions/8088179/using-mockito-with
 https://www.toptal.com/java/a-guide-to-everyday-mockito
 
 spring mvc unit test reference: http://zetcode.com/spring/mockmvc/
+
+## actuator configurations
+In application.properties, there are configurations of actuator.
+https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
+
+
