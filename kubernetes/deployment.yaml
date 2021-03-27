@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springkub
+  name: springkub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springkub
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: springkub
+    spec:
+      containers:
+      - image: hairinwind/springkub
+        name: springkub
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dev
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springkub
+  name: springkub
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: springkub
+  type: ClusterIP
+status:
+  loadBalancer: {}

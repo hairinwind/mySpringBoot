@@ -19,6 +19,7 @@ public class SpringkubApplication {
 
 	@GetMapping("/message")
 	public String getMessage() {
+		System.out.println("endpoint /message is called...");
 		return message;
 	}
 
