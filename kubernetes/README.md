@@ -25,7 +25,20 @@ minikube service
 ```
 minikube service springkub
 ```
-TODO: error: no node port
+
+Get a shell of running pod(container)
+```
+kubectl exec --stdin --tty <pod_name> -- /bin/bash
+```
+type exit to quit
+
+restart one deployment 
+```
+kubectl rollout restart deployment/springkub
+```
+
+## cheatsheet
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 ## config-server build docker image
 ```
@@ -108,3 +121,77 @@ kubectl delete -f deployment.yaml
 kubectl apply -f deployment-springkub.yaml
 minikube service springkub
 ```
+
+## mount configMap as volume and let config server use the files from the mounted volume
+This practice is on branch configserver-file-backend.
+
+create configmap from directory  
+It will import all the files in the directory into configmap, but it won't include the files in subdirectories.kube
+```
+kubectl create configmap configserver-configmap --from-file=config/springkub
+```
+if you need update existing configmap
+```
+kubectl create configmap configserver-configmap --from-file=springkub --dry-run=client -o yaml | kubectl apply -f -
+```
+Or, create the yaml file and then apply it
+```
+kubectl create configmap configserver-configmap --from-file=springkub --dry-run=client -o yaml > springkub-configmap.yml
+kubectl apply -f springkub-configmap.yml
+```
+Once the configmap is created, add that in deployment script
+```
+apiVersion: apps/v1
+kind: Deployment
+...
+spec:
+  ...
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: config-server
+    spec:
+      containers:
+      - image: hairinwind/springkub-config-server
+        name: springkub-config-server
+        resources: {}
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config/springkub
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configserver-configmap
+```
+The config files are mounted to /etc/config/springkub  
+Update the config-server to file based backend. 
+**application.properties**
+```
+spring.cloud.config.server.native.searchLocations=/etc/config,/etc/config/{application}
+```
+build docker image and push  
+kubernetes apply deployment-config-with-configmap-volume.yaml  
+Once it is done, you can login the shell or on web UI, click "..." of that pod and select "execute"
+```
+kubectl exec --stdin --tty <pod_name> -- /bin/bash
+ls /etc/config/springkub
+exit
+```
+The springkub configuration files shall be in that folder.  
+You can also check the configmap by web UI or the command
+```
+kubectl describe configmap configserver-configmap
+```
+Visit the config-server kubernetes service URL, it shall display the content from the configmap. e.g. http://192.168.49.2:30257/springkub/dev
+
+deploy the springkub service, it shall get the properties from the config server. 
+
+I tried to update values in configMap. The config server can get the updates. But the springkub (cloud config client) can not get the updates. I did post to the /actuator/refresh and I saw the response. But the value in springkub is not updated.  
+To get the new value, I have to restart the deployment. 
+```
+kubectl rollout restart deployment/springkub
+```
+
+
+
