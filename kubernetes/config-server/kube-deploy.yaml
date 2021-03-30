@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: config-server
+    spec:
+      containers:
+      - image: config-server:0.0.1-SNAPSHOT
+        name: config-server
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  ports:
+  - name: 8888-8888
+    nodePort: 30881
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: config-server
+  type: NodePort
+status:
+  loadBalancer: {}
