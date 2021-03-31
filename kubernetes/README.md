@@ -15,6 +15,7 @@ https://www.cnblogs.com/larrydpk/p/13611431.html
 https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop#Create-a-Spring-Boot-App  
 https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-pod-configmap/  
 https://cloud.spring.io/spring-cloud-static/spring-cloud-kubernetes/1.0.0.M2/multi/multi__propertysource_reload.html  
+https://github.com/spring-cloud/spring-cloud-kubernetes/blob/master/docs/src/main/asciidoc/security-service-accounts.adoc
 
 ## commands
 
