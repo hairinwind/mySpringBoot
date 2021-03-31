@@ -1,3 +1,11 @@
+## the sub modules
+- config-server is the spring cloud config server with application property files embedded in resources/config
+- config-server-mount-configmap is the spring cloud config server using the mounted application property files from configmap.
+- springkub is the spring cloud config server client
+    - kube-deploy.yaml is connecting the springkub to config-server
+    - kube-configserver-mount-deploy.yaml is connectiong the springkub to config-server-mount-configmap
+- spring-kub-mount-config is not using cloud config server. The application files are mounted to /workspace/config from configmap
+- spring-kub-configmap-api is using spring-cloud-starter-kubernetes-config to access kubernetes API and monitor the configmap changes. 
 
 ## commands
 
@@ -58,9 +66,9 @@ docker push hairinwind/springkub-config-server
 ```
 create kubernetes deployment yaml file
 ```
-kubectl create deployment config-server --image=hairinwind/springkub-config-server --dry-run -o=yaml > deployment-config.yaml
+kubectl create deployment config-server --image=hairinwind/springkub-config-server --dry-run=client -o=yaml > deployment-config.yaml
 echo --- >> deployment-config.yaml
-kubectl create service nodeport config-server --tcp=8888:8888 --dry-run -o=yaml >> deployment-config.yaml
+kubectl create service nodeport config-server --tcp=8888:8888 --dry-run=client -o=yaml >> deployment-config.yaml
 ```
 deploy to kubernetes
 ```
@@ -193,5 +201,9 @@ To get the new value, I have to restart the deployment.
 kubectl rollout restart deployment/springkub
 ```
 
-
+## get image from local docker image
+set ```imagePullPolicy: Never``` in deployment.yml  
+run ```eval $(minikube docker-env)``` to use the minikube docker env.  
+build docker image again  
+run kubectl apply
 
