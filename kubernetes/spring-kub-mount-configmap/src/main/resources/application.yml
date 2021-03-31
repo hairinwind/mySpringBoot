@@ -1,0 +1,9 @@
+server.port: 9091
+
+spring.application.name: spring-kub-mount-configmap
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
