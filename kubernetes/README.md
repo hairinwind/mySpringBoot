@@ -5,7 +5,15 @@
     - kube-deploy.yaml is connecting the springkub to config-server
     - kube-configserver-mount-deploy.yaml is connectiong the springkub to config-server-mount-configmap
 - spring-kub-mount-config is not using cloud config server. The application files are mounted to /workspace/config from configmap
-- spring-kub-configmap-api is using spring-cloud-starter-kubernetes-config to access kubernetes API and monitor the configmap changes. 
+- spring-kub-configmap-api is using spring-cloud-starter-kubernetes-config to access kubernetes API and monitor the configmap changes.
+
+## reference docs
+https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/index.html  
+https://github.com/spring-cloud/spring-cloud-kubernetes#starters  
+https://blog.csdn.net/boling_cavalry/article/details/97529652  
+https://www.cnblogs.com/larrydpk/p/13611431.html  
+https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop#Create-a-Spring-Boot-App  
+https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-pod-configmap/  
 
 ## commands
 

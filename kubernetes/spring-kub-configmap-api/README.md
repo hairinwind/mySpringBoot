@@ -21,3 +21,16 @@ kubectl create deployment spring-kub-configmap-api --image=spring-kub-configmap-
 echo --- >> kube-deploy.yaml
 kubectl create service nodeport spring-kub-configmap-api --tcp=9092:9092 --node-port=30994 --dry-run=client -o=yaml >> kube-deploy.yaml
 ```
+
+apply it to kubernetes  
+update config map  
+no need to trigger /actuator/refresh, it updates automatically  
+refresh the web browser, you shall see the new values   
+
+## reference
+https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/index.html  
+https://github.com/spring-cloud/spring-cloud-kubernetes#starters  
+https://blog.csdn.net/boling_cavalry/article/details/97529652  
+https://www.cnblogs.com/larrydpk/p/13611431.html  
+https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop#Create-a-Spring-Boot-App  
+https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-pod-configmap/  
