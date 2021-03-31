@@ -11,5 +11,4 @@ management:
 server.port: 9090
 
 #spring.config.import: 'optional:configserver:http://localhost:8888/'
-spring.config.import: 'optional:configserver:http://192.168.49.2:31768/'
-management.endpoints.web.exposure.include: '*'
+spring.config.import: 'optional:configserver:http://192.168.49.2:30881/'
