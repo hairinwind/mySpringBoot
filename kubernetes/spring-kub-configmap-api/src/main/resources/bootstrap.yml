@@ -1,0 +1,46 @@
+server.port: 9092
+
+spring:
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        #        mode: polling
+        period: 1000
+        strategy: refresh
+        mode: event
+      config:
+        sources:
+          - name: springkub-configmap
+            namespace: default
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
+
+
+
+#management:
+#  endpoint:
+#    restart:
+#      enabled: true
+#    health:
+#      enabled: true
+#    info:
+#      enabled: true
+
+#spring:
+#  application:
+#    name: springkubconfig
+#  cloud:
+#    kubernetes:
+#      reload:
+#        enabled: true
+#        mode: polling
+#        period: 500
+#      config:
+#        sources:
+#        - name: springkub-configmap
+#          namespace: default

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: config-server-mount-configmap
+  name: config-server-mount-configmap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server-mount-configmap
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: config-server-mount-configmap
+    spec:
+      containers:
+      - image: config-server-mount-configmap:0.0.1-SNAPSHOT
+        name: config-server-mount-configmap
+        resources: {}
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config/springkub
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configserver-configmap
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: config-server-mount-configmap
+  name: config-server-mount-configmap
+spec:
+  ports:
+  - name: 8889-8889
+    nodePort: 30882
+    port: 8889
+    protocol: TCP
+    targetPort: 8889
+  selector:
+    app: config-server-mount-configmap
+  type: NodePort
+status:
+  loadBalancer: {}

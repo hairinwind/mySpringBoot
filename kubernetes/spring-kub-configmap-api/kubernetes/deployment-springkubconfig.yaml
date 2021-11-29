@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springkubconfig
+  name: springkubconfig
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springkubconfig
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: springkubconfig
+    spec:
+      containers:
+      - image: springkubconfig:0.0.1-SNAPSHOT
+        imagePullPolicy: Never
+        name: springkubconfig
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dev
+#        volumeMounts:
+#          - name: config-volume
+#            mountPath: /workspace/config
+#      volumes:
+#        - name: config-volume
+#          configMap:
+#            name: springkub-configmap
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springkubconfig
+  name: springkubconfig
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    nodePort: 30080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: springkubconfig
+  type: NodePort
+status:
+  loadBalancer: {}

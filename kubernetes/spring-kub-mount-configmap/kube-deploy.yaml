@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: "springkub-configmap"
+  creationTimestamp: null
+  labels:
+    app: spring-kube-mount-configmap
+  name: spring-kube-mount-configmap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-kube-mount-configmap
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-kube-mount-configmap
+    spec:
+      containers:
+      - image: spring-kub-mount-configmap:0.0.1-SNAPSHOT
+        name: spring-kub-mount-configmap
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dev
+        volumeMounts:
+          - name: config-volume
+            mountPath: /workspace/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: springkub-configmap
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-kube-mount-configmap
+  name: spring-kube-mount-configmap
+spec:
+  ports:
+  - name: 9091-9091
+    nodePort: 30993
+    port: 9091
+    protocol: TCP
+    targetPort: 9091
+  selector:
+    app: spring-kube-mount-configmap
+  type: NodePort
+status:
+  loadBalancer: {}
