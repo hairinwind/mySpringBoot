@@ -24,13 +24,16 @@ public class RestClientController {
     }
 
     @GetMapping("/webclient")
-    public Mono<String> webclient() throws ExecutionException, InterruptedException {;
-        return webClientBuilder
+    public Mono<String> webclient() throws ExecutionException, InterruptedException {
+        Mono<String> result = webClientBuilder
                 .baseUrl(url)
                 .build()
                 .get()
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(String.class)
+                .doOnError(e -> e.printStackTrace())
+                ;
+        return result;
     }
 
     @GetMapping("/resttemplate")

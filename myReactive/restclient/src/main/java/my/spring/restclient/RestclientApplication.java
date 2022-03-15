@@ -20,8 +20,9 @@ public class RestclientApplication {
 	@Bean
 	public WebClient.Builder webClientBuilder() {
 		ConnectionProvider fixedConnectionProvider = ConnectionProvider.builder("fixed")
-				.maxConnections(180) // not working
-				.pendingAcquireTimeout(Duration.ofSeconds(1))
+				.maxConnections(180) // 最大并发数
+				.pendingAcquireMaxCount(2000) // queue的最大等待数
+				.pendingAcquireTimeout(Duration.ofSeconds(45)) // queue 最大等待时间，default
 				.build();
 		HttpClient httpClient = HttpClient.create(fixedConnectionProvider);
 		ReactorClientHttpConnector rcConnector = new ReactorClientHttpConnector(httpClient);
