@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
 
 @RestController
 @CrossOrigin
-public class HelloController {
+public class QuoteController {
 
     @GetMapping("/hello")
     public Mono<String> hello() {

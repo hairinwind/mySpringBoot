@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
 
 import static java.time.Duration.ofMillis;
 import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
@@ -15,9 +18,11 @@ import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
 @Controller
 public class QuotesController {
 
+    @CrossOrigin
     @GetMapping("/quotes")
-    public String quotes() {
-        return "quotes";
+    @ResponseBody
+    public Mono<String> quotes() {
+        return Mono.just("quotes " + LocalDateTime.now());
     }
 
     @CrossOrigin
