@@ -1,4 +1,9 @@
 
+## create gatling maven project from archetype
+```
+mvn archetype:generate -DarchetypeGroupId=io.gatling.highcharts -DarchetypeArtifactId=gatling-highcharts-maven-archetype
+```
+
 ## command to run it 
 ```
 mvn clean gatling:test -Dgatling.simulationClass=LoadSimulation -Dbase.url=http://localhost:8080/ -Dtest.path=hello/100 -Dsim.users=300
