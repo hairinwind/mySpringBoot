@@ -33,7 +33,7 @@ public class QuoteController {
 
 //        Flux<Quote> quoteFlux = Flux.just(new Quote("DELL", 18.08d), new Quote("GOOG", 1234.0d));
 
-        Flux<Quote> quoteFlux = Flux.generate(
+        Flux<Quote> quoteFlux = Flux.generate( // 这个实现时自己的代码实验，同样功能用 flux.just 就可以
                 () -> 0,
                 (BiFunction<Integer, SynchronousSink<Quote>, Integer>)(state, sink) -> {
                     sink.next(array[state]);
