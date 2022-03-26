@@ -3,9 +3,14 @@ package my.reactive.myreactive.fluxcreate;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * 测试异步的 Flux.create
@@ -76,6 +81,17 @@ public class FluxCreate {
             } else {
                 eventSource.newEvent(new MyEventSource.MyEvent(new Date(), msg));
             }
+
+//            这里想测试一下对无限流的 flux，取 collectList 会是什么结果
+//            在 listMono.block() 那里永远等不到 complete 信号
+//            count++;
+//            if ( count % 2 == 0) {
+//                Mono<List<MyEventSource.MyEvent>> listMono = myFlux.collectList();
+//                List<MyEventSource.MyEvent> myEventList = listMono.block(); // 这里等不到 complete 信号，会一直等待
+//                System.out.println("print @" + count);
+//                myEventList.stream().forEach(System.out::println);
+//            }
+
         }
     }
 
