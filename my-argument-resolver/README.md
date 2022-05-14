@@ -21,3 +21,6 @@ the response shall be
 ```
 hello pathUserId123
 ```
+
+## reference
+https://programmer.ink/think/daily-use-spring-boot-custom-parameter-resolver.html
