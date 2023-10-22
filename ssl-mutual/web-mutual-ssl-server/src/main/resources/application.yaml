@@ -1,0 +1,15 @@
+server:
+  ssl:
+    enabled: true
+    key-store: "classpath:keystore.p12" # this is for the server certificate. If using keytool -list, we shall see PrivateKeyEntry
+    key-store-password: changeit
+    key-store-type: PKCS12
+    client-auth: need # this means the client certificate is needed with the client request
+    trust-store: "classpath:truststore.p12" # this is the trusted CA which sign the client certificate. If using keytool -list, we shall see trustedCertEntry
+    trust-store-password: changeit
+    trust-store-type: PKCS12
+  port: 443
+
+logging.level:
+  javax.net.ssl: DEBUG
+  org.apache.tomcat.util.net: DEBUG
