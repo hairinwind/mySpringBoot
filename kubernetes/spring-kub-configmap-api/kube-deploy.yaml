@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-kub-configmap-api
+  name: spring-kub-configmap-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-kub-configmap-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-kub-configmap-api
+    spec:
+      containers:
+      - image: spring-kub-configmap-api:0.0.1-SNAPSHOT
+        name: spring-kub-configmap-api
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dev
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-kub-configmap-api
+  name: spring-kub-configmap-api
+spec:
+  ports:
+  - name: 9092-9092
+    nodePort: 30994
+    port: 9092
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: spring-kub-configmap-api
+  type: NodePort
+status:
+  loadBalancer: {}

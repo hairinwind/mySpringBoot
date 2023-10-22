@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springkub-config
+data:
+  application.properties: |-
+    config.msg = "kubernetes config"
+  application-dev
