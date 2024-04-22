@@ -1,10 +1,10 @@
-package my.springboot.lib;
+package my.spring.trackid;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootLibApplicationTests {
+class ServiceBApplicationTests {
 
 	@Test
 	void contextLoads() {
