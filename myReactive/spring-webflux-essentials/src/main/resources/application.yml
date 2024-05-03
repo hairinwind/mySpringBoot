@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-webflux-essentials
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/postgres?schema=anime
+    username: root
+    password: root
+
+logging:
+  level:
+    my.webflux: DEBUG
+    io.r2dbc.postgresql: DEBUG
+    org.springframework.r2dbc.connection.R2dbcTransactionManager: DEBUG # to view transaction commit/rollback
+    org.springframework.security: DEBUG
+    org.springframework.security.web.access.ExceptionTranslationFilter: DEBUG
+    org.springdoc: TRACE
+
+server:
+  error:
+    include-stacktrace: on_param # this will only display stacktrace when "?trace=true" is on request URL
+    # the configuration is useless after the GlobalExceptionHandler is implemented
+
+springdoc:
+  swagger-ui:
+    path: /api-docs # visit http://localhost:8080/api-docs
